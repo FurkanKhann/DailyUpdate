@@ -108,7 +108,7 @@ def start_scheduler(app):
         
         scheduler.add_job(
             func=lambda: send_daily_news(app),
-            trigger=CronTrigger(hour=10, minute=00, timezone=ist),
+            trigger=CronTrigger(hour=22, minute=22, timezone=ist),
             id='daily_news_job',
             name='Send daily AI news at 10:00 AM IST',
             replace_existing=True,
@@ -138,3 +138,4 @@ def start_scheduler(app):
     except Exception as e:
         print(f"❌ Error starting scheduler: {e}")
         return None
+
