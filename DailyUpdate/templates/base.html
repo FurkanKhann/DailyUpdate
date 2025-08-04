@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI News Subscription{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🤖 {% block header_title %}AI News Daily{% endblock %}</h1>
+            <p class="subtitle">{% block subtitle %}Stay ahead with the latest in Artificial Intelligence{% endblock %}</p>
+        </header>
+
+        <main class="main-content">
+            {% block alerts %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="alerts">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 AI News Daily. Built with Flask & ❤️</p>
+            <div>
+                <a href="{{ url_for('main.home') }}">Home</a>
+                <a href="{{ url_for('main.subscribe') }}">Subscribe</a>
+                <a href="{{ url_for('main.preview_email') }}">Preview Email</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

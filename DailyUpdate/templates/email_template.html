@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI News Update</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .email-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .email-content {
+            padding: 30px 20px;
+        }
+        .date-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        .article {
+            border-bottom: 1px solid #eee;
+            padding: 25px 0;
+        }
+        .article:last-child {
+            border-bottom: none;
+        }
+        .article h3 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .article h3 a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .article h3 a:hover {
+            color: #667eea;
+        }
+        .article p {
+            color: #555;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .email-footer {
+            background: #f8f9fa;
+            padding: 25px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .unsubscribe-link {
+            color: #666;
+            text-decoration: underline;
+        }
+        .preview-banner {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    {% if preview %}
+    <div class="preview-banner">
+        📧 EMAIL PREVIEW - This is how your daily newsletter will look
+    </div>
+    {% endif %}
+
+    <div class="email-container">
+        <div class="email-header">
+            <h1>🤖 Your Daily AI News</h1>
+            <p>Latest updates in Artificial Intelligence</p>
+        </div>
+        
+        <div class="email-content">
+            <div class="date-info">
+                {% if preview %}
+                    <strong>📅 {{ preview_date }}</strong><br>
+                {% else %}
+                    <strong>📅 {{ current_date }}</strong><br>
+                {% endif %}
+                <em>Delivered at 10:00 AM IST</em>
+            </div>
+            
+            {% for article in articles %}
+            <div class="article">
+                <h3>
+                    <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+                </h3>
+                <p>{{ article.description }}</p>
+                <a href="{{ article.url }}" target="_blank" class="read-more">
+                    Read Full Article →
+                </a>
+            </div>
+            {% endfor %}
+            
+            {% if not articles %}
+            <div class="article">
+                <h3>No articles available today</h3>
+                <p>We're working to bring you the latest AI news. Check back tomorrow!</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="email-footer">
+            <p><strong>🚀 AI News Daily</strong></p>
+            <p>You're receiving this because you subscribed to daily AI news updates.</p>
+            {% if not preview and user_email %}
+            <p>
+                <a href="http://localhost:5000/unsubscribe/{{ user_email }}" class="unsubscribe-link">
+                    Unsubscribe from these emails
+                </a>
+            </p>
+            {% endif %}
+            <p style="margin-top: 15px;">
+                <em>© 2025 AI News Daily. Stay curious, stay informed! 🧠</em>
+            </p>
+        </div>
+    </div>
+
+    {% if preview %}
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{{ url_for('main.home') }}" style="display: inline-block; padding: 12px 24px; background: #667eea; color: white; text-decoration: none; border-radius: 5px;">
+            ← Back to Home
+        </a>
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribe - AI News Daily{% endblock %}
+
+{% block header_title %}Subscribe{% endblock %}
+{% block subtitle %}Get daily AI updates delivered to your inbox{% endblock %}
+
+{% block content %}
+    <div class="subscription-form">
+        <h2>📧 Subscribe to Daily AI News</h2>
+        <p>Enter your email below to start receiving daily AI updates at 10:00 AM IST</p>
+        
+        <form action="{{ url_for('main.subscribe') }}" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Subscribe Now
+            </button>
+        </form>
+        
+        <div style="margin-top: 30px; font-size: 14px; opacity: 0.9;">
+            <h4>📋 What to expect:</h4>
+            <ul style="text-align: left; display: inline-block; margin-top: 15px;">
+                <li>Daily email at 10:00 AM IST</li>
+                <li>3-5 curated AI news articles</li>
+                <li>Brief descriptions and direct links</li>
+                <li>Easy unsubscribe option</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="{{ url_for('main.home') }}" class="btn" style="background: #6c757d; color: white;">
+            ← Back to Home
+        </a>
+    </div>
+{% endblock %}

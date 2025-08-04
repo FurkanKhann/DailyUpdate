@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📧</div>
+            <h3>Daily Updates</h3>
+            <p>Get the latest AI news delivered to your inbox every morning at 10:00 AM IST</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Curated Content</h3>
+            <p>Hand-picked articles about artificial intelligence, machine learning, and emerging tech</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Quick Read</h3>
+            <p>Brief descriptions and direct links to full articles for efficient reading</p>
+        </div>
+    </div>
+
+    {% if total_subscribers %}
+    <div class="stats">
+        <div class="stats-number">{{ total_subscribers }}</div>
+        <p>Active Subscribers</p>
+    </div>
+    {% endif %}
+
+    <div class="subscription-form">
+        <h2>🚀 Start Your AI Journey Today!</h2>
+        <p>Join thousands of professionals staying updated with AI developments</p>
+        
+        <form action="{{ url_for('main.subscribe') }}" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Subscribe to Daily AI News
+            </button>
+        </form>
+        
+        <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">
+            <em>✅ No spam, ✅ Unsubscribe anytime, ✅ Privacy respected</em>
+        </p>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <h3>What You'll Get:</h3>
+        <ul style="text-align: left; display: inline-block; margin-top: 20px;">
+            <li>📰 Latest AI research and breakthroughs</li>
+            <li>💼 Industry applications and business impacts</li>
+            <li>🔧 New tools and frameworks releases</li>
+            <li>🎯 Trends and future predictions</li>
+            <li>🌟 Startup news and funding updates</li>
+        </ul>
+    </div>
+{% endblock %}
