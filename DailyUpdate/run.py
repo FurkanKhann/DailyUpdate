@@ -1,12 +1,16 @@
+# run.py
 import os
 import sys
 from dotenv import load_dotenv
 
+
 # Load environment variables first
 load_dotenv()
 
+
 # Add current directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 
 def main():
     """Main application entry point"""
@@ -27,9 +31,7 @@ def main():
         # Get configuration from environment
         debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
         port = int(os.environ.get('PORT', 5000))
-        
-        # FIXED: Use 0.0.0.0 for production (Render) and localhost for development
-        host = os.environ.get('HOST', '0.0.0.0')  # Changed from 127.0.0.1
+        host = os.environ.get('HOST', '0.0.0.0')  # Changed from '127.0.0.1' to '0.0.0.0'
         
         print(f"📧 Email service: {app.config.get('MAIL_USERNAME', 'Not configured')}")
         print(f"🌐 Running on: http://{host}:{port}")
@@ -64,6 +66,7 @@ def main():
         print("👋 Application stopped")
     
     return 0
+
 
 if __name__ == '__main__':
     exit_code = main()
